@@ -172,7 +172,7 @@ function Stand() {
 
 function Check() {
     MostrarMao();    
-    if(GetScore(mao)>21 &&   GetScore(maoDealer)>21)
+    if(GetScore(mao)>=21 &&   GetScore(maoDealer)>=21)
         Draw();
     else if(GetScore(mao)>21 || GetScore(maoDealer)==21)
         Bust();
