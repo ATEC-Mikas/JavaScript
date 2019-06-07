@@ -100,8 +100,8 @@ function Jogar() {
     baralho=BaralharoBaralhov2(GetBaralho(),2500);
     mao.push(TirarCartav2(baralho,1)[0]);
     maoDealer.push(TirarCartav2(baralho,1)[0]);
-    Hit();
     ShowButtons();
+    Hit();
 }
 
 function sleep(ms) {
@@ -146,9 +146,15 @@ function MostrarMao() {
 
 function GetScore(x) {
     var score=0;
+    let isAs=false;
     x.forEach(function(e){
         score+=e.valor;
+        if(e.valor==11)
+            isAs=true;
     });
+    if(isAs && score>21)
+        score-=10;
+
     return score;
 }
 
