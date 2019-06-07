@@ -10,11 +10,14 @@ main {
 }
 div.game {
     border: solid 1px black;
-    min-height: 100px;
+    min-height: 300px;
     margin:10px;
     display: flex;
 }
 div.game > * {
     width: 46%;
     padding:2%;
+}
+div#message {
+    min-height: 100px;
 }
