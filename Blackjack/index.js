@@ -62,8 +62,8 @@ function BaralharoBaralhov1(baralho,n) {
 
 function BaralharoBaralhov2(baralho,n) { 
     while(n>0) {
-        let x = Math.floor(Math.random() * baralho.length-1) + 1;
-        let y = Math.floor(Math.random() * baralho.length-1) + 1;
+        let x = Math.floor(Math.random() * (baralho.length));
+        let y = Math.floor(Math.random() * (baralho.length));
         let aux=baralho[x];
         baralho[x]=baralho[y];
         baralho[y]=aux;
@@ -88,36 +88,60 @@ function TirarCartav1(baralho,n) {
 function TirarCartav2(baralho,n) {
     let escolhido=[];
     while(n>0) {
-        if(baralho[0]!=undefined) {
-            escolhido.push(baralho.pop());
-            // baralho.splice(0,1);
+        escolhido.push(baralho.pop());
             n--;
-        }
     }
     return escolhido;
 }
 
 function Jogar() {
-    baralho=BaralharoBaralhov2(GetBaralho(),21500);
+    Message("");
+    Reset();
+    baralho=BaralharoBaralhov2(GetBaralho(),2500);
+    mao.push(TirarCartav2(baralho,1)[0]);
+    maoDealer.push(TirarCartav2(baralho,1)[0]);
     Hit();
+    ShowButtons();
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function Reset() {
     baralho=[];
     mao=[];
     maoDealer=[];
+    // ClearMessage();
+    // Check();
+    HideButtons();
+}
+
+async function ClearMessage() {
+    await sleep(10000);
+    Message("");
 }
 
 function MostrarMao() {
-    console.log("Score "+GetScore(mao)+" | Tem na sua mão:");
+    document.getElementById("playerHand").innerHTML="";
+    document.getElementById("dealerHand").innerHTML="";
+    let playerHand = document.createElement("p");
+    playerHand.innerHTML="Score "+GetScore(mao)+"<br> Tem na sua mão:<br>"
+    // console.log("Score "+GetScore(mao)+" | Tem na sua mão:");
     mao.forEach(function(e){
-        console.log(e.carta);
+        // console.log(e.carta);
+        playerHand.innerHTML+=e.carta+"<br>";
     });
-    console.log("Score "+GetScore(maoDealer)+" | Dealer: ");
+    let dealerHand = document.createElement("p");
+    dealerHand.innerHTML="Score "+GetScore(maoDealer)+"<br> Mão do Dealer:<br>"
+    // console.log("Score "+GetScore(maoDealer)+" | Dealer: ");
     maoDealer.forEach(function(e){
-        console.log(e.carta);
+        // console.log(e.carta);
+        dealerHand.innerHTML+=e.carta+"<br>";
     });
-    console.log("x - Hit\nx - Stand")
+    document.getElementById("playerHand").appendChild(playerHand);
+    document.getElementById("dealerHand").appendChild(dealerHand);
+    // console.log("x - Hit\nx - Stand")
 }
 
 function GetScore(x) {
@@ -141,21 +165,35 @@ function Stand() {
 
 
 function Check() {
-    if(GetScore(mao)>21 || GetScore(maoDealer)==21)
+    MostrarMao();    
+    if(GetScore(mao)>21 &&   GetScore(maoDealer)>21)
+        Draw();
+    else if(GetScore(mao)>21 || GetScore(maoDealer)==21)
         Bust();
     else if(GetScore(mao)==21 || GetScore(maoDealer)>21)
         Win();
-    else 
-        MostrarMao();    
 }
 
 function Bust() {
-    console.log("Perdeu!\nSeu Score: "+GetScore(mao)+"\nScore Dealer: "+GetScore(maoDealer));
+    // console.log("Perdeu!\nSeu Score: "+GetScore(mao)+"\nScore Dealer: "+GetScore(maoDealer));
+    Message("Perdeu! <br>Seu Score: "+GetScore(mao)+"<br>Score Dealer: "+GetScore(maoDealer));
     Reset();
 }
 
 function Win() {
-    console.log("Ganhou! Score: "+GetScore(mao));
+    // console.log("Ganhou! Score: "+GetScore(mao)+"\nScore Dealer: "+GetScore(maoDealer));
+    Message("Ganhou! <br>Score: "+GetScore(mao)+"<br>Score Dealer: "+GetScore(maoDealer))
+    Reset();
+}
+
+function Draw() {
+    // console.log("Empatou! Score: "+GetScore(mao)+"\nScore Dealer: "+GetScore(maoDealer));
+    Message("Empatou! <br>Score: "+GetScore(mao)+"<br>Score Dealer: "+GetScore(maoDealer));
+    Reset();
+}
+
+function Message(message) {
+    document.getElementById("message").innerHTML=message;
 }
 
 function Debug() {
@@ -166,8 +204,17 @@ function Dealer() {
     maoDealer.push(TirarCartav2(baralho,1)[0]);
 }
 
+function HideButtons() {
+    document.getElementById("Hit").style.display = "none";
+    document.getElementById("Stand").style.display = "none";
+}
 
-// console.log(GetBaralho());
+function ShowButtons() {
+    document.getElementById("Hit").style.display = "inline-block";
+    document.getElementById("Stand").style.display = "inline-block";
+}
 
-// console.log(TirarCarta(BaralharoBaralhov2(GetBaralho(),21500),2));
-
+window.addEventListener("load",HideButtons);
+document.getElementById("Reset").addEventListener("click",Jogar);
+document.getElementById("Hit").addEventListener("click",Hit);
+document.getElementById("Stand").addEventListener("click",Stand);

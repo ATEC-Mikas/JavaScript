@@ -1,0 +1,20 @@
+body {
+    width: 100%;
+}
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 800px;
+    margin:auto;
+}
+div.game {
+    border: solid 1px black;
+    min-height: 100px;
+    margin:10px;
+    display: flex;
+}
+div.game > * {
+    width: 46%;
+    padding:2%;
+}
