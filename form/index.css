@@ -1,0 +1,14 @@
+div.main {
+    display:flex;
+    flex-direction: column;
+    border:solid 2px black;
+    max-width: 600px;
+    min-height: 100px;
+    margin:10px auto;
+    border-radius: 10px;
+}
+
+div.error {
+    color:red;
+    margin-bottom:10px;
+}
