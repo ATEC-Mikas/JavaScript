@@ -35,10 +35,7 @@ window.addEventListener("load", function(){
         if(password.value==""){
             error[password.id]="Password can't be empty"
         }
-        if(postcode.value=="") {
-            error[postcode.id]="Post Code can't be empty";
-        }
-        else if( !(/\d{4}-\d{3} \w+/g).test(postcode.value) ) {
+        if( !(/^\d{4}\s*-\s*\d{3}\ +\w+$/gm).test(postcode.value) && postcode.value!="") {
             error[postcode.id]="Post Code is not valid";
         }  
 
