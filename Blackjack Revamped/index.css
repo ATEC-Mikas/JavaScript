@@ -1,0 +1,22 @@
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+    margin:auto;
+}
+
+p.hand {
+    display: flex;
+}
+
+p.hand > img {
+    max-height: 250px;
+    margin: 0 5px;
+}
+
+span.placehold {
+    display: block;
+    min-height: 250px;
+}
