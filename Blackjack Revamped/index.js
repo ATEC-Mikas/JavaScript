@@ -127,7 +127,9 @@ window.onload = function() {
 
 function Check() {
     ShowHand();
-    if(GetScore(Game.PlayerDeck)>=21 && GetScore(Game.DealerDeck)>=21)
+    if(GetScore(Game.PlayerDeck)>21 && GetScore(Game.DealerDeck)>21)
+        Draw();
+    else if(GetScore(Game.PlayerDeck)==21 && GetScore(Game.DealerDeck)==21)
         Draw();
     else if(GetScore(Game.PlayerDeck)>21 || GetScore(Game.DealerDeck)==21)
         Bust();
