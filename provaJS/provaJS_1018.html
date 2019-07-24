@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Teste JavaScript - 24/07/2019</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="provaJS_1018.js" type="text/javascript"></script>
+
+    <style>
+        span.error {
+            color:red;
+            margin-top:10px;
+            display:block;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width: 600px; margin:auto">
+        <h1>Torneio de Go da ATEC!</h1>
+
+
+
+        <hr />
+
+
+
+        <div id="areaFormulario">
+            <h2>Inserir Jogador</h2>
+            <form id="formInserirJogador" action="#" method="POST">
+                <strong>Nome:</strong><br /><input type="text" name="txtNomeJogador" /><br />
+                <strong>Email:</strong><br /><input type="text" name="txtEmailJogador" /><br />
+                <strong>Código Postal:</strong><br /><input type="text" name="txtCodPostalJogador" /><br />
+                <span id="erroFormulario" class="error"></span><br />
+                <input type="submit" id="btnInserirJogador" value="INSERIR" /><br />
+            </form>
+        </div>
+
+
+
+        <hr />
+
+
+
+        <div id="areaJogadores">
+            <h2>Jogadores Inscritos</h2>
+            <div id="listaJogadores"></div>
+            <!--TEMPLATE PARA DIV DO JOGADOR
+                
+            <p>
+                <strong>Id: </strong>{ID_DO_JOGADOR}<br />
+                <strong>Nome: </strong>{NOME_DO_JOGADOR}<br />
+                <strong>Código Postal: </strong>{COD_POSTAL_DO_JOGADOR}<br />
+                <strong>Email: </strong>{EMAIL_DO_JOGADOR}<br />
+            </p>
+            
+            -->
+        </div>
+
+
+
+        <hr />
+
+
+
+        <div id="areaEliminar">
+            <h2>Eliminar Jogador</h2>
+            <form id="formEliminarJogador" action="#" method="POST">
+                <input type="text" name="idParaEliminar" placeholder="Id do Jogador a Remover" />
+                <input type="submit" id="btnEliminarJogador" value="ELIMINAR" />
+                <span id="erroEliminar" class="error"></span><br />
+            </form>
+        </div>
+
+
+
+        <hr />
+
+
+
+        <div id="areaJogos">
+            <h2>Jogos</h2>
+            <button type="submit" id="btnEmparelhar">Emparelhar</button>
+            <span id="jogadorExcluido"></span>
+            <div id="listaJogos"></div>
+            <!-- TEMPLATE PARA OS EMPARELHAMENTOS
+            <p><strong>{NOME_DO_JOGADOR_1}</strong> vai jogar contra <strong>{NOME_DO_JOGADOR_2}</strong></p>    
+            -->
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>
